@@ -11,20 +11,23 @@
                  $("#playlist").change(function(){
                     
                     var id = $("#playlist").val();
-                    $.post("seleciona_playlist.php", {"id":id}, function(msg){
-                        console.log(msg);
-                        $.each(msg, function(indice, valor){
-                            if(indice == 0){
-                                texto= '<h3>'+valor.nome_playlist+'</h3>';
-                            }
-                            texto+='<div> <b>Música:</b>'+valor.nome_musica+' ('+valor.nome_banda+') <br/> ';
-                            texto+='<b>Gênero:</b>'+valor.nome_genero+'<br/>';
-                            texto+='<iframe width="220" height="150" src="https://www.youtube.com/embed/'+valor.codigo_musica+'"';
-                            texto+=' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div> <hr/> ';
-                                
+                    if(id != ''){
+                        $.post("seleciona_playlist.php", {"id":id}, function(msg){
+                            $.each(msg, function(indice, valor){
+                                if(indice == 0){
+                                    texto= '<h3>'+valor.nome_playlist+'</h3>';
+                                }
+                                texto+='<div> <b>Música:</b>'+valor.nome_musica+' ('+valor.nome_banda+') <br/> ';
+                                texto+='<b>Gênero:</b>'+valor.nome_genero+'<br/>';
+                                texto+='<iframe width="220" height="150" src="https://www.youtube.com/embed/'+valor.codigo_musica+'"';
+                                texto+=' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> </div> <hr/> ';
+                                    
+                            });
+                            $("#mostrar").html(texto);
                         });
-                        $("#mostrar").html(texto);
-                    });
+                    }else{
+                        document.location.reload(true);
+                    }
                 //window.location.href = "listar_playlist.php";
                 });
             });
