@@ -1,0 +1,48 @@
+footer {
+    position: fixed;
+    height: 50px;
+    background-color:#fafaf0;
+    padding:15px;
+    text-align:center;
+    font-weight:bold;
+    bottom: 0;
+    width: 100%;
+}
+div{
+    padding:10px;
+}
+.cabecalho{
+  background-color: rgb(238, 36, 160);
+}
+a:link {
+    color: black;
+    font-weight:bold;
+  }
+  
+  /* visited link */
+  a:visited {
+    color: black;
+    font-weight:bold;
+  }
+  
+  /* mouse over link */
+  a:hover {
+    color: rgb(59, 106, 233);
+    font-weight:bold;
+  }
+
+  a.menu:hover {
+    color: rgb(59, 106, 233);
+    font-weight:bold;
+  }
+  
+  /* selected link */
+  a:active {
+    color: rgb(59, 106, 233);
+    font-weight:bold;
+  }
+
+  li{
+    color: black;
+      margin-left:20px;
+  }
