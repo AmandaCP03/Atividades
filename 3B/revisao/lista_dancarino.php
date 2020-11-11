@@ -1,6 +1,5 @@
 <?php
 include "conf.php";
-
 cabecalho();
 ?>
 <!doctype html>
@@ -19,7 +18,8 @@ cabecalho();
                     
                     texto='<ul class="list-group list-group-flush col-md-6 text-align: justify">';
                     $.each(msg, function(indice, valor){
-                        texto+= '<li class="list-group-item"><b>'+valor.nome_dancarino+'</b> - '+valor.nome_estilo+'</li>';
+                        texto+= '<li class="list-group-item"><b>'+valor.nome_dancarino+'</b> - '+valor.nome_estilo+'';
+                        texto+= '<button class="btn btn-outline-info remover_dancarino" value='+valor.id_dancarino+' style="margin-left:50px;">Remover</button></li>';
                     });
                     texto+= '<hr/> </ul>';
                    
@@ -36,6 +36,7 @@ cabecalho();
 <body>
 <?php
     include "conexao.php";
+    include "script_remover.php";
     $selectEstilo="SELECT id_estilo, nome_estilo FROM estilo";
     $resultadoEstilo = mysqli_query($conexao,$selectEstilo);
 ?>
@@ -58,12 +59,13 @@ cabecalho();
                     </div>
                 </div>
             </form>
-
+            <div id="msg"> </div>
     <?php
 
         include "conexao.php";
 
-        $select = "SELECT dancarino.nome_dancarino AS nome_dancarino, 
+        $select = "SELECT dancarino.id_dancarino AS id_dancarino, 
+                    dancarino.nome_dancarino AS nome_dancarino, 
                     dancarino.estilo as id_estilo,
                     estilo.nome_estilo AS nome_estilo 
                     FROM dancarino 
@@ -72,9 +74,12 @@ cabecalho();
         $resultado = mysqli_query($conexao,$select);
         
         echo '<div id="conteudo">';
-        echo '<ul class="list-group list-group-flush col-md-6 text-align: justify">';
+        echo '<ul class="list-group list-group-flush col-md-6 text-align:justify">';
         while($linha = mysqli_fetch_assoc($resultado)){
-                echo '<li class="list-group-item"><b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'</li>';
+                echo '<li class="list-group-item">
+                        <b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'
+                        <button class="btn btn-outline-info remover_dancarino" value='.$linha["id_dancarino"].' style="margin-left:50px;">Remover</button>
+                    </li>';
         }
 
         echo "<hr/> </ul> </div>";

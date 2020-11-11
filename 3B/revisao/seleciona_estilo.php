@@ -2,7 +2,8 @@
     header("Content-Type: application/json");
     include "conexao.php";
     $estilo = $_POST["estilo"];
-    $select = "SELECT dancarino.nome_dancarino AS nome_dancarino, 
+    $select = "SELECT dancarino.id_dancarino AS id_dancarino, 
+                dancarino.nome_dancarino AS nome_dancarino, 
                 dancarino.estilo as id_estilo,
                 estilo.nome_estilo AS nome_estilo 
                 FROM dancarino 

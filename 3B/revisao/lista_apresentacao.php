@@ -26,7 +26,8 @@ cabecalho();
                         texto+='<h5 class="card-header" style="background-color:rgb(212, 212, 212)"><b>'+valor.nome_dancarino+'</b> - '+valor.nome_estilo+'</h5>';
                         texto+='<div class="card-body">';
                         texto+='<p><b>Dia: </b>'+valor.dia+' <b> às </b> '+valor.hora+'</p>';
-                        texto+='</div></div><br/>';
+                        texto+='</div> <button class="btn btn-outline-info remover" value='+valor.id_apresentacao+'>Remover</button>';
+                        texto+='</div><br/>';
                         $("#conteudo").html(texto);
                     });
                     //$("#conteudo").html(texto);
@@ -74,12 +75,12 @@ cabecalho();
                     </div>
                 </div>
             </form>
-
+            <div id="msg"> </div>
     <?php
-
-        include "conexao.php";
+        include "script_remover.php";
    
-        $select = "SELECT apresentacao.dia AS dia, 
+        $select = "SELECT apresentacao.id_apresentacao AS id_apresentacao,
+                    apresentacao.dia AS dia,  
                     apresentacao.horario as hora,
                     dancarino.nome_dancarino AS nome_dancarino,
                     estilo.nome_estilo AS nome_estilo
@@ -92,13 +93,13 @@ cabecalho();
 
         echo'<div id="conteudo">';
         while($linha = mysqli_fetch_assoc($resultado)){
-                echo '<div class="card text-center col-lg-6">
-                        <h5 class="card-header" style="background-color:rgb(212, 212, 212)"><b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'</h5>
+                echo '<div class="card text-center col-lg-6" style="margin-bottom:40px;">
+                        <h5 class="card-header" style="background-color:rgb(212, 212, 212); "><b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'</h5>
                         <div class="card-body">
                             <p><b>Dia: </b>'.$linha["dia"].' <b> às </b> '.$linha["hora"].'</p>
                         </div>
-                    </div>
-                    <br/>';
+                        <button class="btn btn-outline-info remover_apresentacao" value='.$linha["id_apresentacao"].'>Remover</button>
+                    </div>';
         }
         echo'</div>';
          

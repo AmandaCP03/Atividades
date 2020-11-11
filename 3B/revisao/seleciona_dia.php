@@ -2,7 +2,8 @@
     header("Content-Type: application/json");
     include "conexao.php";
     $data = $_POST["dia"];
-    $select = "SELECT apresentacao.dia AS dia, 
+    $select = "SELECT apresentacao.id_apresentacao AS id_apresentacao,
+                apresentacao.dia AS dia, 
                 apresentacao.horario as hora,
                 dancarino.nome_dancarino AS nome_dancarino,
                 estilo.nome_estilo AS nome_estilo
