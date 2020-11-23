@@ -22,15 +22,16 @@ cabecalho();
                         if(indice == 0){
                             texto="";
                         }
-                        texto+='<div class="card text-center col-lg-6">';
-                        texto+='<h5 class="card-header" style="background-color:rgb(212, 212, 212)"><b>'+valor.nome_dancarino+'</b> - '+valor.nome_estilo+'</h5>';
+                        texto+='<div class="card text-center col-lg-6" style="margin-bottom:40px;">';
+                        texto+='<h5 class="card-header" style="background-color:rgb(212, 212, 212);"><b>'+valor.nome_dancarino+'</b> - '+valor.nome_estilo+'</h5>';
                         texto+='<div class="card-body">';
                         texto+='<p><b>Dia: </b>'+valor.dia+' <b> às </b> '+valor.hora+'</p>';
-                        texto+='</div> <button class="btn btn-outline-info remover" value='+valor.id_apresentacao+'>Remover</button>';
-                        texto+='</div><br/>';
+                        texto+='<button class="btn btn-outline-warning alterar_apresentacao" value='+valor.id_apresentacao+' data-toggle="modal" data-target="#modal" style="margin-bottom:10px;" >Alterar</button>';
+                        texto+='<button class="btn btn-primary remover_apresentacao" value='+valor.id_apresentacao+'>Remover</button>';
+                        texto+='</div>';
                         $("#conteudo").html(texto);
                     });
-                    //$("#conteudo").html(texto);
+                    
                 });
             }else{
                 document.location.reload(true);
@@ -77,7 +78,9 @@ cabecalho();
             </form>
             <div id="msg"> </div>
     <?php
-        include "script_remover.php";
+
+        echo'<div id="conteudo">';
+        echo'<div id="lista">';
    
         $select = "SELECT apresentacao.id_apresentacao AS id_apresentacao,
                     apresentacao.dia AS dia,  
@@ -90,21 +93,24 @@ cabecalho();
 
         $resultado = mysqli_query($conexao,$select);
 
-
-        echo'<div id="conteudo">';
         while($linha = mysqli_fetch_assoc($resultado)){
                 echo '<div class="card text-center col-lg-6" style="margin-bottom:40px;">
                         <h5 class="card-header" style="background-color:rgb(212, 212, 212); "><b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'</h5>
                         <div class="card-body">
                             <p><b>Dia: </b>'.$linha["dia"].' <b> às </b> '.$linha["hora"].'</p>
                         </div>
-                        <button class="btn btn-outline-info remover_apresentacao" value='.$linha["id_apresentacao"].'>Remover</button>
+                        <button class="btn btn-outline-warning alterar_apresentacao" value='.$linha["id_apresentacao"].' data-toggle="modal" data-target="#modal" style="margin-bottom:10px;" >Alterar</button>
+                        <button class="btn btn-primary remover_apresentacao" value='.$linha["id_apresentacao"].'>Remover</button>
                     </div>';
         }
-        echo'</div>';
+        echo'</div></div>';
          
-       
-    
+$titulo = "Alterar Apresentações";
+$nome_form = "alterar_apresentacao.php";
+$salvar="apresentacao";
+include "modal.php";
+include "scripts.php";    
+
 rodape();
 
 ?>

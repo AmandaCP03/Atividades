@@ -11,15 +11,16 @@ cabecalho();
     <?php
 
         include "conexao.php";
-        include "script_remover.php";
+
+        echo '<ul class="list-group list-group-flush col-md-6 text-align: justify" id="lista">';
         $select = "SELECT nome_estilo, id_estilo FROM estilo ORDER BY nome_estilo";
 
         $resultado = mysqli_query($conexao,$select);
-
-        echo '<ul class="list-group list-group-flush col-md-6 text-align: justify">';
         while($linha = mysqli_fetch_assoc($resultado)){
                 echo '<li class="list-group-item">'.$linha["nome_estilo"].'
-                        <button class="btn btn-outline-info remover_estilo" value='.$linha["id_estilo"].' style="margin-left:50px;">Remover</button>
+                        <button class="btn btn-outline-warning alterar_estilo" value='.$linha["id_estilo"].' style="margin-left:50px;" 
+                        data-toggle="modal" data-target="#modal">Alterar</button>
+                        <button class="btn btn-primary remover_estilo" value='.$linha["id_estilo"].'>Remover</button>
                     </li>';
         }
 
@@ -27,8 +28,14 @@ cabecalho();
          
        
     
-rodape();
 
+$titulo = "Alterar Estilo";
+$nome_form = "alterar_estilo.php";
+$salvar="estilo";
+include "modal.php";
+include "scripts.php";
+
+rodape();
 ?>
             </center>
         </div>

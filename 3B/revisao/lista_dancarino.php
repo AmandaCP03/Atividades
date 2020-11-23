@@ -11,8 +11,8 @@ cabecalho();
 
 <script>
     $(document).ready(function(){
-        $("select[name=estilo]").change(function(){
-            var estilo = $("select[name=estilo]").val();
+        $("select[name=filtro_estilo]").change(function(){
+            var estilo = $("select[name=filtro_estilo]").val();
             if(estilo != ''){
                 $.post("seleciona_estilo.php", {"estilo":estilo}, function(msg){
                     
@@ -36,7 +36,6 @@ cabecalho();
 <body>
 <?php
     include "conexao.php";
-    include "script_remover.php";
     $selectEstilo="SELECT id_estilo, nome_estilo FROM estilo";
     $resultadoEstilo = mysqli_query($conexao,$selectEstilo);
 ?>
@@ -48,7 +47,7 @@ cabecalho();
             <form name="filtro">
                 <div class="form-group row">
                     <div class="col-auto col-lg-5" style="margin-left: 29%;">
-                        <select class="form-control" name="estilo">
+                        <select class="form-control" name="filtro_estilo">
                             <option label ="::SELECIONE UM ESTILO::"></option>
                             <?php
                                 while($linhaEstilo = mysqli_fetch_assoc($resultadoEstilo)){
@@ -64,6 +63,9 @@ cabecalho();
 
         include "conexao.php";
 
+        echo '<div id="conteudo">';
+        echo '<ul class="list-group list-group-flush col-md-6 text-align:justify" id="lista">';
+
         $select = "SELECT dancarino.id_dancarino AS id_dancarino, 
                     dancarino.nome_dancarino AS nome_dancarino, 
                     dancarino.estilo as id_estilo,
@@ -73,19 +75,25 @@ cabecalho();
 
         $resultado = mysqli_query($conexao,$select);
         
-        echo '<div id="conteudo">';
-        echo '<ul class="list-group list-group-flush col-md-6 text-align:justify">';
+        
         while($linha = mysqli_fetch_assoc($resultado)){
                 echo '<li class="list-group-item">
                         <b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'
-                        <button class="btn btn-outline-info remover_dancarino" value='.$linha["id_dancarino"].' style="margin-left:50px;">Remover</button>
+                        <button class="btn btn-outline-warning alterar_dancarino" value='.$linha["id_dancarino"].' style="margin-left:50px;" 
+                        data-toggle="modal" data-target="#modal">Alterar</button>
+                        <button class="btn btn-primary remover_dancarino" value='.$linha["id_dancarino"].'>Remover</button>
                     </li>';
         }
 
         echo "<hr/> </ul> </div>";
          
        
-    
+$titulo = "Alterar Dançarinos";
+$nome_form = "alterar_dancarino.php";
+$salvar="dancarino";
+include "modal.php";
+include "scripts.php";
+        
 rodape();
 
 ?>
