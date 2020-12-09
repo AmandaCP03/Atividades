@@ -21,6 +21,12 @@ $resultado = mysqli_query($conexao,$select)
     </div>
 
     <div class="form-group row">
+        <div class="col-autoo col-lg-10" style="margin-left: 7%;">
+            <input type="email" name="email" placeholder="Email..." class="form-control">
+        </div>
+    </div>
+
+    <div class="form-group row">
         <div class="col-auto col-lg-10" style="margin-left: 7%;">
             <select class="form-control" name="estilo">
                 <option label ="::SELECIONE UM ESTILO::"></option>

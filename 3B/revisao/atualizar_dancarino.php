@@ -5,10 +5,12 @@
     $id_dancarino = $_POST["id_dancarino"];
     $nome_dancarino = $_POST["nome_dancarino"];
     $estilo = $_POST["id_estilo"];
+    $email = $_POST["email"];
 
     $update = "UPDATE dancarino SET 
                     nome_dancarino='$nome_dancarino',
-                    estilo=$estilo
+                    estilo=$estilo,
+                    email='$email',
                     WHERE id_dancarino=$id_dancarino";
 
     

@@ -67,6 +67,8 @@
                     $("input[name='id_dancarino']").val(a.id_dancarino);
                     $("input[name='nome_dancarino']").val(a.nome_dancarino);
                     $("select[name='estilo']").val(a.id_estilo);
+                    $("input[name='email']").val(a.email);
+                    $("input[name='senha']").val(a.senha);
                 });
             });
 
@@ -109,7 +111,9 @@
            p = {
                 id_dancarino:$("input[name='id_dancarino']").val(),
                 nome_dancarino:$("input[name='nome_dancarino']").val(),
-                id_estilo:$("select[name='estilo']").val()
+                id_estilo:$("select[name='estilo']").val(),
+                email:$("input[name='email']").val(),
+                senha:$("input[name='senha']").val()
            };
            $.post("atualizar_dancarino.php",p,function(r){
             if(r=='1'){
@@ -161,6 +165,7 @@
                 
                 t += "<li class='list-group-item'>";
                 t +=   "<b>"+a.nome_dancarino+"</b> - "+a.nome_estilo;
+                t +=    "<p>"+a.email+"</p>"
                 t +=   "<button class='btn btn-outline-warning alterar_dancarino' value='"+a.id_dancarino+"' style='margin-left:50px;'  data-toggle='modal' data-target='#modal'>Alterar</button>";
                 t +=   " <button class='btn btn-primary remover_dancarino' value='"+a.id_dancarino+"'>Remover</button>";
                 t += "</li>";

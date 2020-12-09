@@ -69,6 +69,7 @@ cabecalho();
         $select = "SELECT dancarino.id_dancarino AS id_dancarino, 
                     dancarino.nome_dancarino AS nome_dancarino, 
                     dancarino.estilo as id_estilo,
+                    dancarino.email AS email,
                     estilo.nome_estilo AS nome_estilo 
                     FROM dancarino 
                     INNER JOIN estilo ON dancarino.estilo=estilo.id_estilo";
@@ -78,8 +79,9 @@ cabecalho();
         
         while($linha = mysqli_fetch_assoc($resultado)){
                 echo '<li class="list-group-item">
-                        <b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'
-                        <button class="btn btn-outline-warning alterar_dancarino" value='.$linha["id_dancarino"].' style="margin-left:50px;" 
+                        <b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'<br/>
+                        Email: '.$linha["email"].'
+                        <button class="btn btn-outline-warning alterar_dancarino" value='.$linha["id_dancarino"].' " 
                         data-toggle="modal" data-target="#modal">Alterar</button>
                         <button class="btn btn-primary remover_dancarino" value='.$linha["id_dancarino"].'>Remover</button>
                     </li>';
@@ -93,6 +95,7 @@ $nome_form = "alterar_dancarino.php";
 $salvar="dancarino";
 include "modal.php";
 include "scripts.php";
+include "modal_login.php";
         
 rodape();
 

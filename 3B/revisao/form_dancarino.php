@@ -8,14 +8,17 @@ cabecalho();
 <head>
     <meta charset="utf-8">
     <script src="../../jquery-3.5.1.min.js"></script>
-    <title>Exercício Compartilhado</title>
+    <script src="js/md5.js"></script>
+    <title>Exercicio Pratico</title>
     
 <script>
     $(document).ready(function(){
         $("#cadastrar").click(function(){
             var estilo=$("select[name=estilo]").val();
             var dancarino=$("input[name=nome]").val();
-            $.get("salvar_dancarino.php", {"estilo": estilo, "dancarino": dancarino}, function(msg){
+            var email=$("input[name=email]").val();
+            var  senha = $.md5($("input[name='senha']").val());
+            $.get("salvar_dancarino.php", {"estilo": estilo, "dancarino": dancarino, "email": email, "senha": senha}, function(msg){
                 $("#formulario").hide();
                 $("#conteudo").html(msg);
             });
@@ -50,12 +53,22 @@ cabecalho();
                 </div>
             </div>
             <div class="form-group row">
-                <div class="col-autoo col-lg-10" style="margin-left: 7%;">
-                    <input type="text" name="nome" placeholder="Nome do grupo de dança..." class="form-control">
+                <div class="col-auto col-lg-10" style="margin-left: 7%;">
+                    <input type="text" name="nome" placeholder="Nome..." class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-auto col-lg-10" style="margin-left: 7%;">
+                    <input type="email" name="email" placeholder="Email..." class="form-control">
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-auto col-lg-10" style="margin-left: 7%;">
+                    <input type="password" name="senha" placeholder="Senha..." class="form-control">
                 </div>
             </div>
             <div class="from-group row">
-                <div class="col-autoo col-lg-10" style="margin-left: 7%;">
+                <div class="col-auto col-lg-10" style="margin-left: 7%; margin-bottom: 7%;">
                     <button class="btn btn-secondary form-control" id="cadastrar">Cadastrar</button>
                 </div>
             </div>
