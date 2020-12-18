@@ -1,6 +1,10 @@
 <?php
 include "conf.php";
 cabecalho();
+
+if(!isset($_SESSION["usuario"])){
+    echo"<script>location.href='index.php'</script>";
+}
 ?>
         <div class="container-fluid">
             <center>
@@ -17,11 +21,13 @@ cabecalho();
 
         $resultado = mysqli_query($conexao,$select);
         while($linha = mysqli_fetch_assoc($resultado)){
-                echo '<li class="list-group-item">'.$linha["nome_estilo"].'
-                        <button class="btn btn-outline-warning alterar_estilo" value='.$linha["id_estilo"].' style="margin-left:50px;" 
-                        data-toggle="modal" data-target="#modal">Alterar</button>
-                        <button class="btn btn-primary remover_estilo" value='.$linha["id_estilo"].'>Remover</button>
-                    </li>';
+                echo '<li class="list-group-item">'.$linha["nome_estilo"].'';
+                        if($_SESSION["permissao"]=='1'){
+                            echo'<button class="btn btn-outline-warning alterar_estilo" value='.$linha["id_estilo"].' style="margin-left:50px;" 
+                            data-toggle="modal" data-target="#modal">Alterar</button>                        
+                            <button class="btn btn-primary remover_estilo" value='.$linha["id_estilo"].'>Remover</button>';
+                        }
+                        echo'</li>';
         }
 
         echo "<hr/> </ul>";

@@ -38,4 +38,18 @@ $resultado = mysqli_query($conexao,$select)
             </select>
         </div>
     </div>
+
+    <div class="form-group row">
+        <div class="col-auto col-lg-10" style="margin-left: 7%;">
+            <input type="checkbox" name="trocar_senha" value="1" /> Trocar Senha <br />
+        </div>
+
+        <div class="col-auto col-lg-10" style="margin-left: 7%;">
+            <div id="trocar_senha" style="display:none;">      
+                <input type="password" name="senha_cadastro" placeholder="Digite a senha..." class="form-control input-control col-6" /> 
+                <!-- <input type="password" name="senha_cadastro" placeholder="Digite a senha..." class="form-control input-control col-6" />  -->
+            </div>
+        </div>
+    </div>
+
 </form>

@@ -1,3 +1,4 @@
+
 <script>
 
     $(function(){
@@ -108,12 +109,16 @@
        });
 
        $(".salvar_dancarino").click(function(){ 
+           var senha_cad = $("input[name='senha_cadastro']").val();
+           if(senha_cad != ""){
+            senha_cad = $.md5(senha_cad);
+           }
            p = {
                 id_dancarino:$("input[name='id_dancarino']").val(),
                 nome_dancarino:$("input[name='nome_dancarino']").val(),
                 id_estilo:$("select[name='estilo']").val(),
                 email:$("input[name='email']").val(),
-                senha:$("input[name='senha']").val()
+                senha:senha_cad
            };
            $.post("atualizar_dancarino.php",p,function(r){
             if(r=='1'){
@@ -122,6 +127,7 @@
                 atualizar_dancarino();                
             }else{
                 $("#msg").html("<b>Falha ao atualizar dançarino.</b>").css({color:"red"});
+                $(".close").click();
             }
            });
        }); 
@@ -167,7 +173,9 @@
                 t +=   "<b>"+a.nome_dancarino+"</b> - "+a.nome_estilo;
                 t +=    "<p>"+a.email+"</p>"
                 t +=   "<button class='btn btn-outline-warning alterar_dancarino' value='"+a.id_dancarino+"' style='margin-left:50px;'  data-toggle='modal' data-target='#modal'>Alterar</button>";
-                t +=   " <button class='btn btn-primary remover_dancarino' value='"+a.id_dancarino+"'>Remover</button>";
+                if($_SESSION["permissao"]=='1'){
+                    t +=   " <button class='btn btn-primary remover_dancarino' value='"+a.id_dancarino+"'>Remover</button>";
+                }
                 t += "</li>";
             });            
             

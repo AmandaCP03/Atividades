@@ -1,12 +1,18 @@
 <?php
 include "conf.php";
 cabecalho();
+
+if(!isset($_SESSION["usuario"])){
+    echo"<script>location.href='index.php'</script>";
+}
+
 ?>
 <!doctype html>
 <html>
 <head>
     <meta charset="utf-8">
     <script src="../../jquery-3.5.1.min.js"></script>
+    <script src='js/cadastro.js'></script>
     <title>Exercício Compartilhado</title>
 
 <script>
@@ -29,6 +35,17 @@ cabecalho();
                 document.location.reload(true);
             }
         });
+
+        $("input[name='trocar_senha']").change(function(){
+            if($("input[name='trocar_senha']:checked").val()=='1'){
+                $("#trocar_senha").fadeIn();
+            }
+            else{
+                $("input[name='senha_cadastro']").val("");
+                $("input[name='confirma_senha']").val("");
+                $("#trocar_senha").fadeOut();
+            }
+        }); 
     });
             
 </script>
@@ -44,20 +61,22 @@ cabecalho();
             <div class="d-flex justify-content-center">
                 <h6 class="display-4">Grupos de Dança</h6>
             </div>
-            <form name="filtro">
-                <div class="form-group row">
-                    <div class="col-auto col-lg-5" style="margin-left: 29%;">
-                        <select class="form-control" name="filtro_estilo">
-                            <option label ="::SELECIONE UM ESTILO::"></option>
-                            <?php
-                                while($linhaEstilo = mysqli_fetch_assoc($resultadoEstilo)){
-                                    echo '<option value='.$linhaEstilo["id_estilo"].'> '.$linhaEstilo["nome_estilo"].'</option>';
-                                }
-                            ?>
-                        </select>
-                    </div>
-                </div>
-            </form>
+            <?php
+                if($_SESSION["permissao"]=="1"){
+                    echo'<form name="filtro">
+                        <div class="form-group row">
+                            <div class="col-auto col-lg-5" style="margin-left: 29%;">
+                                <select class="form-control" name="filtro_estilo">
+                                    <option label ="::SELECIONE UM ESTILO::"></option>';
+                                        while($linhaEstilo = mysqli_fetch_assoc($resultadoEstilo)){
+                                            echo '<option value='.$linhaEstilo["id_estilo"].'> '.$linhaEstilo["nome_estilo"].'</option>';
+                                        }
+                            echo' </select>
+                            </div>
+                        </div>
+                    </form>';
+                }
+            ?>
             <div id="msg"> </div>
     <?php
 
@@ -74,6 +93,10 @@ cabecalho();
                     FROM dancarino 
                     INNER JOIN estilo ON dancarino.estilo=estilo.id_estilo";
 
+        if($_SESSION["permissao"]=='2'){
+            $select .= " WHERE id_dancarino='".$_SESSION["usuario"]."'";
+        }
+
         $resultado = mysqli_query($conexao,$select);
         
         
@@ -82,9 +105,11 @@ cabecalho();
                         <b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'<br/>
                         Email: '.$linha["email"].'
                         <button class="btn btn-outline-warning alterar_dancarino" value='.$linha["id_dancarino"].' " 
-                        data-toggle="modal" data-target="#modal">Alterar</button>
-                        <button class="btn btn-primary remover_dancarino" value='.$linha["id_dancarino"].'>Remover</button>
-                    </li>';
+                        data-toggle="modal" data-target="#modal">Alterar</button>';
+                        if($_SESSION["permissao"]=='1'){
+                            echo'<button class="btn btn-primary remover_dancarino" value='.$linha["id_dancarino"].'>Remover</button>';
+                        }
+                        echo'</li>';
         }
 
         echo "<hr/> </ul> </div>";

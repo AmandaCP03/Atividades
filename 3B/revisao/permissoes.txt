@@ -1,0 +1,23 @@
+Permissões de acesso aos diferentes usuários
+
+Usuário não logado:
+    -Realizar o cadastro de dançarino
+    -Realizar o cadastro de estilos
+    -Login
+
+Usuário logado como dançarino (permissão - 2):
+    -Vizualizar e alterar os seus próprios dados
+    -Vizualizar estilos
+    -Cadastrar estilos
+    -Cadastrar apresentações
+    -Vizualizar apresentações
+    -Alterar suas próprias apresentações
+
+Usuário Administrador (permissão - 1):
+    -Cadastrar dançarino
+    -Cadastrar estilo
+    -Cadastrar apresentação
+    -Vizualizar dançarinos cadastrados, alterá-los e removê-los
+    -Vizualizar estilos cadastrados, alterá-los e removê-los
+    -Vizualizar apresentações cadastradas, alterá-las e removê-las
+    

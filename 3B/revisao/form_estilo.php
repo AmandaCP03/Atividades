@@ -2,6 +2,8 @@
 include "conf.php";
 
 cabecalho();
+include "modal_login.php";
+
 ?>
 <!doctype html>
 <html>

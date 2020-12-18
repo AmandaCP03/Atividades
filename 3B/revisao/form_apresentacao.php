@@ -2,6 +2,10 @@
 include "conf.php";
 
 cabecalho();
+
+if(!isset($_SESSION["usuario"])){
+    echo"<script>location.href='index.php'</script>";
+}
 ?>
 <!doctype html>
 <html>
@@ -40,14 +44,17 @@ cabecalho();
     <div id="formulario" class="justify-content-center">  
             <div class="form-group row">
                 <div class="col-auto col-lg-10" style="margin-left: 7%;">
-                    <select class="form-control" name="dancarino">
-                        <option label ="::SELECIONE UM GRUPO::"></option>
-                        <?php
-                            while($linha = mysqli_fetch_assoc($resultado)){
-                                echo '<option value='.$linha["id_dancarino"].'> '.$linha["nome_dancarino"].'</option>';
-                            }
-                        ?>
-                    </select>
+                    <?php 
+                    if($_SESSION["permissao"]=="1"){
+                        echo'<select class="form-control" name="dancarino">
+                            <option label ="::SELECIONE UM GRUPO::"></option>';
+                                while($linha = mysqli_fetch_assoc($resultado)){
+                                    echo '<option value='.$linha["id_dancarino"].'> '.$linha["nome_dancarino"].'</option>';
+                                }
+                            
+                        echo'</select>';
+                    }
+                    ?>
                 </div>
             </div>
             <div class="form-group row">

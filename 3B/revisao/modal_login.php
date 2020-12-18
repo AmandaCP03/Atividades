@@ -33,7 +33,6 @@
 <script>
   $(function(){
     $(".autenticar").click(function(){
-      console.log("Ola");
       var senha_md5 = $.md5($("input[name='senha_login']").val());
       $("input[name='senha_login']").val(senha_md5);
       $("form[name='login']").submit();

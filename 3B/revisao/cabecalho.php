@@ -1,5 +1,4 @@
 <?php
-
 function cabecalho(){
     session_start();
     $alt = $GLOBALS["alt"];
@@ -28,51 +27,125 @@ function cabecalho(){
             <div class='collapse navbar-collapse' id='menu'>
                 <ul class='navbar-nav'>";
                 if(isset($_SESSION["usuario"])){
+                     if($_SESSION["permissao"] == "1"){
                       echo"<li role='presentation' class='dropdown'>
                         <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
                           Cadastrar <span class='caret'></span>
                         </a>
                         <ul class='dropdown-menu'>";                        
-                    foreach($menu as $i=>$l){
-                        echo "<li class='nav-item'>
-                                <a class='menu' href='form_$i.php'>$l</a>
-                            </li>";
-                    }  
-                    echo "</ul>
-                    </li>
-                    <li role='presentation' class='dropdown'>
-                    <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
-                      Listar <span class='caret'></span>
-                    </a>
-                    <ul class='dropdown-menu'>";                        
-                foreach($menu as $i=>$l){
-                    echo "<li class='nav-item'>
-                            <a class='menu' href='lista_$i.php'>$l</a>
-                        </li>";
-                }  
-                echo "
-                </ul>
-            </li>
-            <li>
-                <ul class='navbar-nav'>
-                    <li role='presentation'>
-                        <a href='logout.php'>
-                            Logout (SAIR)
+                        foreach($menu as $i=>$l){
+                            echo "<li class='nav-item'>
+                                    <a class='menu' href='form_$i.php'>$l</a>
+                                </li>";
+                        }  
+                        echo "</ul>
+                        </li>
+                        <li role='presentation' class='dropdown'>
+                        <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                        Listar <span class='caret'></span>
                         </a>
-                    </li>
-                </ul>
-            </li>";
-                }else{
-                    
-                echo "<li>
+                        <ul class='dropdown-menu'>";                        
+                            foreach($menu as $i=>$l){
+                                echo "<li class='nav-item'>
+                                        <a class='menu' href='lista_$i.php'>$l</a>
+                                    </li>";
+                            }  
+                            echo "
+                            </ul>
+                        </li>
+                        <li>
+                            <ul class='navbar-nav'>
+                                <li role='presentation'>
+                                    <a href='logout.php'>
+                                        Logout (SAIR)
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>";
+                    }if($_SESSION["permissao"] == "2"){
+                        echo "
                         <ul class='navbar-nav'>
-                            <li role='presentation'>
-                                <a href='#' data-toggle='modal' data-target='#modal_login'>
-                                    Login
+                            <li role='presentation' class='dropdown'>
+                                <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                    Listar <span class='caret'></span>
                                 </a>
+                                <ul class='dropdown-menu'>
+                                    <li role='presentation'>
+                                        <a href='lista_dancarino.php'>
+                                            Seus dados 
+                                        </a>
+                                    </li>
+                                    <li role='presentation'>
+                                        <a href='lista_apresentacao.php'>
+                                            Apresentações 
+                                        </a>
+                                    </li>
+                                    <li role='presentation'>
+                                        <a href='lista_estilo.php'>
+                                            Estilos
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li role='presentation' class='dropdown'>
+                                <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                    Cadastrar <span class='caret'></span>
+                                </a>
+                                <ul class='dropdown-menu'>
+                                    <li role='presentation'>
+                                        <a href='form_apresentacao.php'>
+                                            Apresentações 
+                                        </a>
+                                    </li>
+                                    <li role='presentation'>
+                                        <a href='form_estilo.php'>
+                                            Estilo 
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li role='presentation' class='dropdown'>
+                                <ul class='navbar-nav'>
+                                    <li role='presentation'>
+                                        <a href='logout.php'>
+                                            Logout (SAIR)
+                                        </a>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
-                    </li>";
+                        ";
+                    }
+                }else{
+                    
+                echo "<ul class='navbar-nav'>
+                        <li>
+                            <ul class='navbar-nav'>
+                                <li role='presentation'>
+                                    <a href='#' data-toggle='modal' data-target='#modal_login'>
+                                        Login
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li role='presentation' class='dropdown'>
+                            <a class='dropdown-toggle' data-toggle='dropdown' href='#' role='button' aria-haspopup='true' aria-expanded='false'>
+                                Cadastrar <span class='caret'></span>
+                            </a>
+                            <ul class='dropdown-menu'>
+                                <li role='presentation'>
+                                    <a href='form_dancarino.php'>
+                                        Dançarino 
+                                    </a>
+                                </li>
+                                <li role='presentation'>
+                                    <a href='form_estilo.php'>
+                                        Estilo 
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>";
                 }
 
 

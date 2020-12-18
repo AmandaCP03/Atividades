@@ -2,14 +2,15 @@
     header("Content-Type: application/json");
     include "conexao.php";
 
-    if(!empty($_GET["estilo"]) && !empty($_GET["dancarino"]) && !empty($_GET["email"]) && !empty($_GET["email"])){
+    if(!empty($_POST["estilo"])){
 
-        $estilo = $_GET["estilo"];
-        $dancarino = $_GET["dancarino"];
-        $email = $_GET["email"];
-        $senha = $_GET["senha"];
+        $estilo = $_POST["estilo"];
+        $dancarino = $_POST["dancarino"];
+        $email = $_POST["email"];
+        $senha = $_POST["senha"];
 
-        $query = "INSERT into dancarino(nome_dancarino, estilo, email, senha) values('$dancarino','$estilo', '$email', '$senha')";
+        $query = "INSERT into dancarino(nome_dancarino, estilo, email, senha, permissao) 
+        values('$dancarino','$estilo', '$email', '$senha', '2')";
  
         mysqli_query($conexao, $query) or die($query);
 

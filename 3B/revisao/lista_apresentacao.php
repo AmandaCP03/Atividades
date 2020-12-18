@@ -2,6 +2,10 @@
 include "conf.php";
 
 cabecalho();
+
+if(!isset($_SESSION["usuario"])){
+    echo"<script>location.href='index.php'</script>";
+}
 ?>
 <!doctype html>
 <html>
@@ -85,6 +89,7 @@ cabecalho();
         $select = "SELECT apresentacao.id_apresentacao AS id_apresentacao,
                     apresentacao.dia AS dia,  
                     apresentacao.horario as hora,
+                    apresentacao.dancarino as dancarino,
                     dancarino.nome_dancarino AS nome_dancarino,
                     estilo.nome_estilo AS nome_estilo
                     FROM apresentacao 
@@ -98,10 +103,14 @@ cabecalho();
                         <h5 class="card-header" style="background-color:rgb(212, 212, 212); "><b>'.$linha["nome_dancarino"].'</b> - '.$linha["nome_estilo"].'</h5>
                         <div class="card-body">
                             <p><b>Dia: </b>'.$linha["dia"].' <b> às </b> '.$linha["hora"].'</p>
-                        </div>
-                        <button class="btn btn-outline-warning alterar_apresentacao" value='.$linha["id_apresentacao"].' data-toggle="modal" data-target="#modal" style="margin-bottom:10px;" >Alterar</button>
-                        <button class="btn btn-primary remover_apresentacao" value='.$linha["id_apresentacao"].'>Remover</button>
-                    </div>';
+                        </div>';
+                        if($linha["dancarino"] == $_SESSION["usuario"]){
+                            echo'<button class="btn btn-outline-warning alterar_apresentacao" value='.$linha["id_apresentacao"].' data-toggle="modal" data-target="#modal" style="margin-bottom:10px;" >Alterar</button>';
+                        }
+                        if($_SESSION["permissao"]=='1'){
+                            echo'<button class="btn btn-primary remover_apresentacao" value='.$linha["id_apresentacao"].'>Remover</button>';
+                        }
+                    echo'</div>';
         }
         echo'</div></div>';
          
