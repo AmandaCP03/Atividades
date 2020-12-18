@@ -7,7 +7,7 @@
     <script src="main.js"></script>
 </head>
 <body>
-    <h5>Página com links das minhas atividades</h5>
+    <h1>Página com links das minhas atividades</h1>
     <a href="2B/trabalho_2Bim/index.php">Projeto 2o bimestre</a> <br/>
     <a href="3B/revisao/index.php">Projeto 3o bimestre</a>
 </body>
