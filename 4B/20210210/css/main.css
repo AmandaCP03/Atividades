@@ -1,19 +1,6 @@
-body{
-	font-size: 1.2em;
+.body_login{
+	background-image: url("../img/bg.jpg");
 }
-
-header{
-	min-height: 100px;
-	background-color: rgb(224, 11, 11);
-	padding:10px 0 0 60px;
-	color:white;
-	font-family: 'Trebuchet MS', sans-serif;
-}
-
-.conteudo{
-	margin-top: 50px;
-}
-
 .modal {
 	display: none; /* Hidden by default */
 	position: fixed; /* Stay in place */
@@ -28,15 +15,22 @@ header{
 	padding-top: 40px;
     
 }
-
+.avatar{
+	width: 30%;
+	height: auto;
+	border-radius: 50%;
+}
+.container_modal {
+	padding: 16px;
+    width: 50rem;
+    height: 20rem;
+}
 /* Modal Content/Box */
-.modal_conteudo {
+.modal-content {
 	background-color: #fefefe;
 	margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
 	border: 1px solid #888;
 	width: 50%; /* Could be more or less, depending on screen size */
-	min-height: 70%;
-	padding: 50px 20px 30px 20px;
    
 }
 @-webkit-keyframes animatezoom {
@@ -47,6 +41,34 @@ header{
 @keyframes animatezoom {
 	from {transform: scale(0)} 
 	to {transform: scale(1)}
+}
+.navbar{
+	background-color:rgb(0, 0, 0);
+	color: white;
+}
+.form_login{
+	min-height: 40vh;
+	background-color:rgb(0, 0, 0);
+	border-radius: 4%;
+	padding-top: 3vh;
+	text-align: center;
+	color: white;
+	font-style: italic;
+	
+}
+.cad{
+	color: white;
+	font-style: italic;
+	font-size: larger;
+	font-weight: 700;
+}
+.lista li{
+	color: rgb(0, 0, 0);
+	padding-top: 10px;
+  }
+.linha{
+	border-left: 2px solid rgb(0, 0, 0);
+	height: auto;
 }
 
 .card-horizontal {

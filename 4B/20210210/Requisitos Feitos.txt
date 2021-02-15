@@ -1,0 +1,10 @@
+O trabalho foi realizado pelas alunas: Amália Melo & Amanda Campezan
+
+Os requisitos realizados do projeto prático foram:
+    - 1.A aplicação deve possuir uma página para que leitores realizem sua assinatura no
+    portal. Para isso, devem ser informados os seguintes dados: CPF, nome, endereço de
+    e-mail e senha. E suas restrições.
+    - 2.A aplicação deve possuir uma página inicial que permita aos assinantes efetuarem
+    sua autenticação.
+    - 5.Crie duas páginas que exibam notícias quaisquer cujo acesso será controlado. A
+    aplicação deve permitir apenas 5 acessos por mês a um leitor que não é assinante.

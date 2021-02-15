@@ -10,8 +10,15 @@
     </head>
     <body>    
         <?php
-            include "cabecalho.html";
-            include "modal_acesso.html";
+            session_start();
+            if(isset($_SESSION["cpf"])){
+                include "cabecalho2.php";
+                echo'<input type="text" id="sessao" value="'.$_SESSION["cpf"].'"  hidden>';
+            }
+            else{
+                echo'<input type="text" id="sessao" value=" "  hidden>';
+                include "cabecalho.html";
+            }
         ?>
         <div class="container conteudo">
             <center><h1>Lavieri: Palmeiras teve Mundial ruim, mas não apaga feitos da temporada</h1></center>
@@ -39,6 +46,7 @@
             </div>
         </div>
         <?php
+         include "modal_acesso.html";
             include "rodape.html";
         ?>
     </body>

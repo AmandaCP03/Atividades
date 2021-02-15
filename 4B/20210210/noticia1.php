@@ -10,8 +10,15 @@
     </head>
     <body>    
         <?php
-            include "cabecalho.html";
-            include "modal_acesso.html";
+            session_start();
+            if(isset($_SESSION["cpf"])){
+                include "cabecalho2.php";
+                echo'<input type="text" id="sessao" value="'.$_SESSION["cpf"].'"  hidden>';
+            }
+            else{
+                echo'<input type="text" id="sessao" value=" "  hidden>';
+                include "cabecalho.html";
+            }
         ?>
         <div class="container conteudo">
             <center><h1>Brasil já aplicou ao menos uma dose de vacina em mais de 4,58 milhões, aponta consórcio de veículos de imprensa</h1></center>
@@ -40,7 +47,8 @@
                 </div>
             </div>
         </div>
-        <?php
+        <?php            
+            include "modal_acesso.html";
             include "rodape.html";
         ?>
     </body>
